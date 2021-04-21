@@ -14,6 +14,8 @@ const appOption: Options = {
 };
 
 const handleAppStatus = (): void => console.log(`Listening on port ${PORT}`);
-createConnection(ConnectionOptions).then((_) => {
-	app.start(appOption, handleAppStatus);
-});
+createConnection(ConnectionOptions)
+	.then((_) => {
+		app.start(appOption, handleAppStatus);
+	})
+	.catch((e) => console.log(e));
