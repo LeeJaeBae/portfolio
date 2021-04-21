@@ -14,38 +14,38 @@ import bcrypt from 'bcrypt';
 const BCRYPT_ROUNDS = 10;
 @Entity()
 class User extends BaseEntity {
-	@PrimaryGeneratedColumn() id!: number;
+	@PrimaryGeneratedColumn() id: number;
 
 	@Column({ type: 'text', nullable: true })
 	@IsEmail()
-	email!: string | null;
+	email: string | null;
 
 	@Column({ type: 'boolean', default: false })
-	verifiedEmail!: boolean;
+	verifiedEmail: boolean;
 
 	@Column({ type: 'text' })
-	firstName!: string;
+	firstName: string;
 
 	@Column({ type: 'text' })
-	lastName!: string;
+	lastName: string;
 
 	@Column({ type: 'int' })
-	age!: number;
+	age: number;
 
 	@Column({ type: 'text' })
-	password!: string;
+	password: string;
 
 	@Column({ type: 'text' })
-	profilePhoto!: string;
+	profilePhoto: string;
 
 	@CreateDateColumn()
-	createAt!: string;
+	createAt: string;
 
 	@UpdateDateColumn()
-	updateAt!: string;
+	updateAt: string;
 
 	@Column({ type: 'text' })
-	nickName!: string;
+	nickName: string;
 
 	get fullName(): string {
 		return `${this.firstName} ${this.lastName}`;
@@ -62,6 +62,10 @@ class User extends BaseEntity {
 			const hashedPassword = await this.hashPassword(this.password);
 			this.password = hashedPassword;
 		}
+	}
+
+	public comparePassword(password: string): Promise<boolean> {
+		return bcrypt.compare(password, this.password);
 	}
 }
 
