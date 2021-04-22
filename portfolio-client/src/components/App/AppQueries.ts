@@ -1,9 +1,9 @@
-import gql from 'graphql-tag';
+import { gql } from 'apollo-boost';
 
-export const IS_LOGGEN_IN = gql`
+export const IS_LOGGED_IN = gql`
 	{
-		autn {
-			isLoggenIn @client
+		auth {
+			isLoggedIn @client
 		}
 	}
 `;
