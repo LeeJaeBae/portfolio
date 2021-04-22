@@ -1,0 +1,10 @@
+type Board {
+	id: Int!
+	name: String!
+	view: Int!
+	text: String!
+	isFav: Boolean!
+	createAt: String!
+	updateAt: String
+	pages: [Page]
+}

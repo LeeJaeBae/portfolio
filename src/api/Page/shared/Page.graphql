@@ -1,0 +1,12 @@
+type Page {
+	id: Int!
+	name: String!
+	view: Int!
+	text: String!
+	isFav: Boolean!
+	user: User!
+	createAt: String!
+	updateAt: String
+	board: Board!
+	comment: [Comment]
+}

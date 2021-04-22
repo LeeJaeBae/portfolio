@@ -6,10 +6,13 @@ import {
 	Column,
 	CreateDateColumn,
 	Entity,
+	ManyToOne,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
 } from 'typeorm';
 import bcrypt from 'bcrypt';
+import Page from './Page';
+import Comment from './Comment';
 
 const BCRYPT_ROUNDS = 10;
 @Entity()
@@ -46,6 +49,12 @@ class User extends BaseEntity {
 
 	@Column({ type: 'text' })
 	nickName: string;
+
+	@ManyToOne((type) => Page, (page) => page.user)
+	page: Page[];
+
+	@ManyToOne((type) => Comment, (comment) => comment.user)
+	comment: Comment[];
 
 	get fullName(): string {
 		return `${this.firstName} ${this.lastName}`;

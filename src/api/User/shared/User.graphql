@@ -11,6 +11,9 @@ type User {
 	updateAt: String
 	fullName: String
 	nickName: String
+
+	page: [Page]
+	comment: [Comment]
 }
 
 type Query {

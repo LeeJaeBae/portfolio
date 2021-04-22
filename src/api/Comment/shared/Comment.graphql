@@ -1,0 +1,9 @@
+type Comment {
+	id: Int!
+	linkPage: Page!
+	user: User!
+	userId: Int!
+	createAt: String!
+	updateAt: String!
+	text: String!
+}

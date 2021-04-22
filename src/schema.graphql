@@ -1,3 +1,80 @@
+type Board {
+  id: Int!
+  name: String!
+  view: Int!
+  text: String!
+  isFav: Boolean!
+  createAt: String!
+  updateAt: String
+  pages: [Page]
+}
+
+type Comment {
+  id: Int!
+  linkPage: Page!
+  user: User!
+  userId: Int!
+  createAt: String!
+  updateAt: String!
+  text: String!
+}
+
+type Page {
+  id: Int!
+  name: String!
+  view: Int!
+  text: String!
+  isFav: Boolean!
+  createBy: User!
+  createAt: String!
+  updateAt: String
+  comments: [Comment]
+}
+
+type EmailSignInResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type Mutation {
+  EmailSignIn(email: String!, password: String!): EmailSignInResponse!
+  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, age: Int!): EmailSignUpResponse!
+}
+
+type EmailSignUpResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type User {
+  id: Int!
+  email: String
+  verifiedEmail: Boolean!
+  firstName: String!
+  lastName: String!
+  age: Int
+  password: String
+  profilePhoto: String
+  createAt: String!
+  updateAt: String
+  fullName: String
+  nickName: String
+  page: [Page]
+  comment: [Comment]
+}
+
 type Query {
-  sayHello: String!
+  user: User
+}
+
+type Verification {
+  id: Int!
+  target: String!
+  payload: String!
+  key: String!
+  used: Boolean!
+  createAt: String!
+  updateAt: String
 }
