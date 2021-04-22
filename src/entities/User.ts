@@ -47,7 +47,7 @@ class User extends BaseEntity {
 	@UpdateDateColumn()
 	updateAt: string;
 
-	@Column({ type: 'text' })
+	@Column({ type: 'text', nullable: true })
 	nickName: string;
 
 	@ManyToOne((type) => Page, (page) => page.user)

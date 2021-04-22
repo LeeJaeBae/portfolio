@@ -49,6 +49,17 @@ type EmailSignUpResponse {
   token: String
 }
 
+type GetMyProfileResponse {
+  ok: Boolean!
+  error: String
+  user: User
+}
+
+type Query {
+  GetMyProfile: GetMyProfileResponse!
+  user: User
+}
+
 type User {
   id: Int!
   email: String
@@ -64,10 +75,6 @@ type User {
   nickName: String
   page: [Page]
   comment: [Comment]
-}
-
-type Query {
-  user: User
 }
 
 type Verification {
