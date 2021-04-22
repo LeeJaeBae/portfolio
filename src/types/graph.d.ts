@@ -1,4 +1,4 @@
-export const typeDefs = ["type Board {\n  id: Int!\n  name: String!\n  view: Int!\n  text: String!\n  isFav: Boolean!\n  createAt: String!\n  updateAt: String\n  pages: [Page]\n}\n\ntype Comment {\n  id: Int!\n  linkPage: Page!\n  user: User!\n  userId: Int!\n  createAt: String!\n  updateAt: String!\n  text: String!\n}\n\ntype Page {\n  id: Int!\n  name: String!\n  view: Int!\n  text: String!\n  isFav: Boolean!\n  createBy: User!\n  createAt: String!\n  updateAt: String\n  comments: [Comment]\n}\n\ntype EmailSignInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype Mutation {\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, age: Int!): EmailSignUpResponse!\n}\n\ntype EmailSignUpResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype User {\n  id: Int!\n  email: String\n  verifiedEmail: Boolean!\n  firstName: String!\n  lastName: String!\n  age: Int\n  password: String\n  profilePhoto: String\n  createAt: String!\n  updateAt: String\n  fullName: String\n  nickName: String\n  page: [Page]\n  comment: [Comment]\n}\n\ntype Query {\n  user: User\n}\n\ntype Verification {\n  id: Int!\n  target: String!\n  payload: String!\n  key: String!\n  used: Boolean!\n  createAt: String!\n  updateAt: String\n}\n"];
+export const typeDefs = ["type Board {\n  id: Int!\n  name: String!\n  view: Int!\n  text: String!\n  isFav: Boolean!\n  createAt: String!\n  updateAt: String\n  pages: [Page]\n}\n\ntype Comment {\n  id: Int!\n  linkPage: Page!\n  user: User!\n  userId: Int!\n  createAt: String!\n  updateAt: String!\n  text: String!\n}\n\ntype Page {\n  id: Int!\n  name: String!\n  view: Int!\n  text: String!\n  isFav: Boolean!\n  user: User!\n  createAt: String!\n  updateAt: String\n  board: Board!\n  comment: [Comment]\n}\n\ntype EmailSignInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype Mutation {\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, age: Int!): EmailSignUpResponse!\n}\n\ntype EmailSignUpResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype User {\n  id: Int!\n  email: String\n  verifiedEmail: Boolean!\n  firstName: String!\n  lastName: String!\n  age: Int\n  password: String\n  profilePhoto: String\n  createAt: String!\n  updateAt: String\n  fullName: String\n  nickName: String\n  page: [Page]\n  comment: [Comment]\n}\n\ntype Query {\n  user: User\n}\n\ntype Verification {\n  id: Int!\n  target: String!\n  payload: String!\n  key: String!\n  used: Boolean!\n  createAt: String!\n  updateAt: String\n}\n"];
 /* tslint:disable */
 
 export interface Query {
@@ -28,10 +28,22 @@ export interface Page {
   view: number;
   text: string;
   isFav: boolean;
-  createBy: User;
+  user: User;
   createAt: string;
   updateAt: string | null;
-  comments: Array<Comment> | null;
+  board: Board;
+  comment: Array<Comment> | null;
+}
+
+export interface Board {
+  id: number;
+  name: string;
+  view: number;
+  text: string;
+  isFav: boolean;
+  createAt: string;
+  updateAt: string | null;
+  pages: Array<Page> | null;
 }
 
 export interface Comment {
@@ -73,17 +85,6 @@ export interface EmailSignUpResponse {
   ok: boolean;
   error: string | null;
   token: string | null;
-}
-
-export interface Board {
-  id: number;
-  name: string;
-  view: number;
-  text: string;
-  isFav: boolean;
-  createAt: string;
-  updateAt: string | null;
-  pages: Array<Page> | null;
 }
 
 export interface Verification {

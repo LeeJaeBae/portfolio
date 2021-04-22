@@ -25,10 +25,11 @@ type Page {
   view: Int!
   text: String!
   isFav: Boolean!
-  createBy: User!
+  user: User!
   createAt: String!
   updateAt: String
-  comments: [Comment]
+  board: Board!
+  comment: [Comment]
 }
 
 type EmailSignInResponse {
