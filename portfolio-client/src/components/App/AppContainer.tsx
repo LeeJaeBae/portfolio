@@ -5,6 +5,7 @@ import { createGlobalStyle, ThemeProvider } from 'src/typed-components';
 import { theme } from 'src/theme';
 import AppPresenter from './AppPresenter';
 import { IS_LOGGED_IN } from './AppQueries';
+import Routes from './Routes';
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css?family=Maven+Pro');
@@ -30,12 +31,12 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const AppContainer: any = (props: any) => {
-	console.log(props);
 	return (
 		<>
 			<GlobalStyle />
 			<ThemeProvider theme={theme}>
 				<AppPresenter isLoggedIn={props.data.auth.isLoggedIn} />
+				<Routes />
 			</ThemeProvider>
 		</>
 	);
