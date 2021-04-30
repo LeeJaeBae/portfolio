@@ -1,11 +1,12 @@
-import React from 'react';
-import { graphql } from 'react-apollo';
+import { useEffect } from 'react';
+import { graphql, useQuery } from 'react-apollo';
 import reset from 'styled-reset';
 import { createGlobalStyle, ThemeProvider } from 'src/typed-components';
 import { theme } from 'src/theme';
-import AppPresenter from './AppPresenter';
 import { IS_LOGGED_IN } from './AppQueries';
 import Routes from './Routes';
+import gql from 'graphql-tag';
+import { useState } from 'react';
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css?family=Maven+Pro');
@@ -31,11 +32,37 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const AppContainer: any = (props: any) => {
+	const query = useQuery(gql`
+		query {
+			GetMyProfile {
+				ok
+				error
+				user {
+					fullName
+				}
+			}
+		}
+	`);
+
+	const [user, setUser] = useState();
+
+	useEffect(() => {
+		if (props.data.auth.isLoggedIn) {
+			if (query.data && query.data.GetMyProfile?.user) {
+				setUser(query.data.GetMyProfile?.user);
+			}
+		}
+	}, [query]);
+
+	useEffect(() => {
+		user && console.log(user);
+		console.log(props);
+	}, [user]);
+
 	return (
 		<>
 			<GlobalStyle />
 			<ThemeProvider theme={theme}>
-				<AppPresenter isLoggedIn={props.data.auth.isLoggedIn} />
 				<Routes />
 			</ThemeProvider>
 		</>

@@ -8,6 +8,5 @@ ReactDOM.render(
 	<ApolloProvider client={apolloClient}>
 		<App />
 	</ApolloProvider>,
-
 	document.getElementById('root')
 );

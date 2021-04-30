@@ -1,17 +1,21 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Home } from 'src/routes/Home';
+import { SignIn } from 'src/routes/SignIn';
 import Template from '../template/Template';
 
 const Routes = () => {
 	return (
 		<BrowserRouter>
-			<Switch>
-				<Template>
+			<Template>
+				<Switch>
 					<Route exact path='/'>
 						<Home />
 					</Route>
-				</Template>
-			</Switch>
+					<Route exact path='/signin'>
+						<SignIn />
+					</Route>
+				</Switch>
+			</Template>
 		</BrowserRouter>
 	);
 };
